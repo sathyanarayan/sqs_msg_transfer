@@ -41,3 +41,6 @@ optional arguments:
 ```
 python sqs_move_msg.py -s "https://eu-west-1.queue.amazonaws.com/<accountnumber>/testing-deals-queue-dlq" -d "https://eu-west-1.queue.amazonaws.com/<accountnumber>/testing-deals-queue-1" -r eu-west-1  -b 10
 ```
+## Release
+
+``` https://pypi.org/project/sqs-msg-transfer/#modal-close ```
