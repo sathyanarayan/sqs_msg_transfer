@@ -79,6 +79,7 @@ def run_from_cli():
     parser.add_argument("-r","--region",type=str,help="The queue Regions in the order of source destination",required=True)
     parser.add_argument("-b","--batch",type=int,help="The number of messages to request each iteration 10 maximum",required=False,default=10)
     parser.add_argument("-pf", "--profile", help="profile", required=True,default='default')
+    parser.add_argument("-f", "--filepath", help="aws credentials file path", required=True,default='default')
     args = parser.parse_args()
     print(args)
     if not args.dest or not args.source:
@@ -89,15 +90,14 @@ def run_from_cli():
     batch_value = args.batch
     source_region = args.region
     boolean_purge = args.purge
+    filepath = args.filepath
     config = configparser.ConfigParser()
-    config.read("<file-path-to-credentials>")
+    config.read(filepath)
     profile = args.profile
-    print(profile)
     aws_accesskey = config[profile]['aws_access_key_id']
     aws_secretkey = config[profile]['aws_secret_access_key']
     logging.debug("Calling move_message with the required params")
     logging.debug(args)
-    print(aws_accesskey)
     sqs_queue = boto3.client('sqs',aws_access_key_id=aws_accesskey, aws_secret_access_key=aws_secretkey, region_name=source_region)
     move_message(sqs_queue,source_queue,destination_queue,batch_value,source_region,boolean_purge)
 
