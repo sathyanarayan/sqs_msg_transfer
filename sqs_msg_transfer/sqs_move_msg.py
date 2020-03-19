@@ -90,7 +90,7 @@ def run_from_cli():
     source_region = args.region
     boolean_purge = args.purge
     config = configparser.ConfigParser()
-    config.read("/Users/sathyaam/.aws/credentials")
+    config.read("<file-path-to-credentials>")
     profile = args.profile
     print(profile)
     aws_accesskey = config[profile]['aws_access_key_id']
